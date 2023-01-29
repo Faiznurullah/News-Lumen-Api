@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,12 +17,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href=" https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    
 
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -35,11 +37,18 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
-                     <a class="nav-link" href="{{ route('daftar') }}">{{ __('Daftar Artikel') }}</a>
-                    </ul>
+
+                   
+            @guest
+            @else
+             <!-- Left Side Of Navbar -->
+             <ul class="navbar-nav mr-auto">
+                <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+             <a class="nav-link" href="{{ route('daftar') }}">{{ __('Daftar Artikel') }}</a>
+            </ul>
+
+            @endguest
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -57,23 +66,23 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                                <ul class="dropdown-menu">
+                                  <li>
+
+                                    <a class="dropdown-item" href="#"  onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                        @csrf 
+                                    </form> 
+                                </li>
+                                </ul>
+                              </li>
+                            
+
                         @endguest
                     </ul>
                 </div>
@@ -86,15 +95,19 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src=" https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src=" https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
 
  <!-- Optional JavaScript; choose one of the two! -->
  <script>
      $(document).ready(function() {
-      $('#tableBuku').DataTable();
+      $('#tabel-data').DataTable();
   } );
 </script>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
 </body>
 </html>

@@ -14,8 +14,8 @@
                      </div>  
                     @endif
                     
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="tableBuku" class="table table-bordered" width="100%">
+                    <div class="table-responsive mt-4">
+                        <table  id="tabel-data" class="table table-bordered"  width="100%">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -48,4 +48,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection
